@@ -45,6 +45,8 @@ RUN apt-get update \
 
 RUN git clone --recursive https://github.com/ipython/ipython.git; cd ipython; git checkout 3.x; python setup.py install; cd ..; rm -rf ipython
 
+RUN pip install --upgrade PyDrive google-api-python-client jsonpointer jsonschema tornado sphinx pygments nose readline mistune
+
 RUN apt-get install -y -o Dpkg::Options::="--force-confdef" -o DPkg::Options::="--force-confold" apt-utils python-software-properties software-properties-common \
     && apt-add-repository -y ppa:staticfloat/juliareleases \
     && add-apt-repository -y ppa:staticfloat/julia-deps \
