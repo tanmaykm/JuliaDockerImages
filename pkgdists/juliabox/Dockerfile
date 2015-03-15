@@ -2,34 +2,9 @@
 # Tag: tanmaykm/juliaboxpkgdist
 # Version:v0.3.6_build_1
 
-FROM tanmaykm/julia:v0.3.6
+FROM tanmaykm/juliaboxminpkgdist:v0.3.6_build_1
 
 MAINTAINER Tanmay Mohapatra
-
-# Install additional packages required for Julia packages
-RUN apt-get update \
-    && apt-get install -y \
-    imagemagick \
-    inkscape \
-    pandoc \
-    pdf2svg \
-    hdf5-tools \
-    python-sympy \
-    python-numpy \
-    python-scipy \
-    python-matplotlib \
-    glpk-utils \
-    libnlopt0 \
-    && apt-get clean
-
-ADD texlive.profile /tmp/tl/texlive.profile
-RUN cd /tmp/tl; wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz; \
-    tar -xzf install-tl-unx.tar.gz; cd install-tl-*; \
-    ./install-tl --profile=../texlive.profile; cd /; rm -rf /tmp/tl; \
-    echo "export PATH=/usr/local/texlive/2014/bin/x86_64-linux:\$PATH" > /etc/profile.d/texlive.sh; \
-    echo "export INFOPATH=/usr/local/texlive/2014/texmf-dist/doc/info:\$INFOPATH" >> /etc/profile.d/texlive.sh; \
-    echo "export MANPATH=/usr/local/texlive/2014/texmf-dist/doc/man:\$MANPATH" >>  /etc/profile.d/texlive.sh; \
-    chmod 755 /etc/profile.d/texlive.sh
 
 # Sundials
 RUN apt-get install -y \
@@ -45,6 +20,7 @@ RUN apt-get install -y \
 
 # NLopt
 RUN apt-get install -y \
+    libnlopt0 \
     libnlopt-dev \
     && apt-get clean
 
@@ -84,25 +60,10 @@ RUN mkdir stan; cd stan; wget https://github.com/stan-dev/cmdstan/releases/downl
     cd ..; \
     rm -rf stan
 
-ENV PATH /usr/local/texlive/2014/bin/x86_64-linux:/usr/local/bin:/usr/bin:/bin:/usr/games:/sbin:/usr/sbin
-
-# Cairo
-RUN apt-get install -y \
-    gettext \
-    libpango1.0-dev \
-    libpango1.0-0 \
-    libgvc6 \
-    graphviz \
-    libgraphviz-dev \
-    && apt-get clean
-
 # Nemo
 RUN apt-get install -y \
     m4 \
     && apt-get clean
-
-# SymPy
-RUN pip install --upgrade sympy
 
 RUN mkdir mpir; cd mpir; wget http://mpir.org/mpir-2.7.0-alpha11.tar.bz2; \
     tar -xvf mpir-2.7.0-alpha11.tar.bz2; cd mpir-2.7.0; \
@@ -126,7 +87,5 @@ RUN mkdir flint2; cd flint2; git clone https://github.com/wbhart/flint2.git; \
     rm -rf flint2
 
 ADD setup_julia.sh /tmp/setup_julia.sh
-
-RUN mkdir /.juliabox
 
 RUN /tmp/setup_julia.sh

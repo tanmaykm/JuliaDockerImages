@@ -25,6 +25,7 @@ The default user in the image is `root` with home directory `/root`. The default
 Description                     | Image & Latest Version                           | URL
 --------------------------------|--------------------------------------------------|-------------------------------------
 Base Julia v0.3.6               | `tanmaykm/julia:v0.3.6`                          | [tanmaykm/julia](https://registry.hub.docker.com/u/tanmaykm/julia/)
+JuliaBox minimal package bundle | `tanmaykm/juliaboxminpkgdist:v0.3.6_build_1`     | [tanmaykm/juliaboxminpkgdist](https://registry.hub.docker.com/u/tanmaykm/juliaboxminpkgdist/)
 JuliaBox package bundle         | `tanmaykm/juliaboxpkgdist:v0.3.6_build_1`        | [tanmaykm/juliaboxpkgdist](https://registry.hub.docker.com/u/tanmaykm/juliaboxpkgdist/)
 
 ## Contributing
