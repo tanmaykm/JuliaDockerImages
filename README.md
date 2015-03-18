@@ -10,7 +10,7 @@ The Julia package distributions build on the base image and bundle a set of pack
 Select the appropriate base Julia or a package distribution that matches your requirement and follow the steps below to install and run.
 
 ### Installation
-- Docker images are available at https://registry.hub.docker.com/u/tanmaykm/
+- Docker images are available at https://registry.hub.docker.com/u/julialang/
 - Pull the selected image with: `docker pull <imagename>:<version>`
 
 ### Running
@@ -24,9 +24,9 @@ The default user in the image is `root` with home directory `/root`. The default
 
 Description                     | Image & Latest Version                           | URL
 --------------------------------|--------------------------------------------------|-------------------------------------
-Base Julia v0.3.6               | `tanmaykm/julia:v0.3.6`                          | [tanmaykm/julia](https://registry.hub.docker.com/u/tanmaykm/julia/)
-JuliaBox minimal package bundle | `tanmaykm/juliaboxminpkgdist:v0.3.6_build_1`     | [tanmaykm/juliaboxminpkgdist](https://registry.hub.docker.com/u/tanmaykm/juliaboxminpkgdist/)
-JuliaBox package bundle         | `tanmaykm/juliaboxpkgdist:v0.3.6_build_1`        | [tanmaykm/juliaboxpkgdist](https://registry.hub.docker.com/u/tanmaykm/juliaboxpkgdist/)
+Base Julia v0.3.6               | `julialang/julia:v0.3.6`                          | [julialang/julia](https://registry.hub.docker.com/u/julialang/julia/)
+JuliaBox minimal package bundle | `julialang/juliaboxminpkgdist:v0.3.6_build_1`     | [julialang/juliaboxminpkgdist](https://registry.hub.docker.com/u/julialang/juliaboxminpkgdist/)
+JuliaBox package bundle         | `julialang/juliaboxpkgdist:v0.3.6_build_1`        | [julialang/juliaboxpkgdist](https://registry.hub.docker.com/u/julialang/juliaboxpkgdist/)
 
 ## Contributing
 Please submit pull requests to update/add packages. As far as possible, please extend from an existing image specification to avoid duplication.
