@@ -1,8 +1,8 @@
 # Docker file for JuliaBox
-# Tag: tanmaykm/juliaboxpkgdist
+# Tag: julialang/juliaboxpkgdist
 # Version:v0.3.7_build_1
 
-FROM tanmaykm/juliaboxminpkgdist:v0.3.7_build_1
+FROM julialang/juliaboxminpkgdist:v0.3.7_build_1
 
 MAINTAINER Tanmay Mohapatra
 
