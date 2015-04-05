@@ -7,6 +7,16 @@ This docker image bundles:
 - Elly.jl
 
 The docker image can be used to easily setup a Hadoop cluster with Julia. It can also be conveniently run in standalone mode for building / testing Julia packages or code.
+It uses [serf](https://www.serfdom.io/) and [dnsmasq](http://en.wikipedia.org/wiki/Dnsmasq) to dynamically register nodes and create hadoop configuration.
+
+Note that since some of the Julia packages bundled are specific to Julia 0.4, this is based on the Julia 0.4 nightly build. While building this image locally, ensure 
+Dockerfile points to the correct Julia nightly build.
+
+## Pull image:
+````
+docker pull julialang/hadoop:v0.4.0_build1
+docker tag julialang/hadoop:latest julialang/julia:v0.4.0_build1
+````
 
 ## Start standalone:
 1. start the docker container: `docker run -it julialang/hadoop`

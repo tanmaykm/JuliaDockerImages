@@ -51,7 +51,7 @@ RUN apt-get install -y -o Dpkg::Options::="--force-confdef" -o DPkg::Options::="
     && apt-add-repository -y ppa:staticfloat/julianightlies \
     && add-apt-repository -y ppa:staticfloat/julia-deps \
     && apt-get update \
-    && apt-get install -y julia=0.4.0-2059~ubuntu14.04.1 \
+    && apt-get install -y julia=0.4.0-2061~ubuntu14.04.1 \
     && apt-get clean
 
 # setup dnsmasq
