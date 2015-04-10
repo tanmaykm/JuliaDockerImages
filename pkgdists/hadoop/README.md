@@ -15,7 +15,7 @@ Dockerfile points to the correct Julia nightly build.
 ## Pull image:
 ````
 docker pull julialang/hadoop:v0.4.0_build1
-docker tag julialang/hadoop:latest julialang/julia:v0.4.0_build1
+docker tag julialang/hadoop:v0.4.0_build1 julialang/hadoop:latest
 ````
 
 ## Start standalone:
@@ -24,8 +24,8 @@ docker tag julialang/hadoop:latest julialang/julia:v0.4.0_build1
 
 ## Start cluster:
 1. Start the master node
-  - either in daemon mode to use with APIs only: `docker run -d -t --dns 127.0.0.1 -e NODE_TYPE=n -e NNODES=2 -P --name master -h master.julia julialang/hadoop /hadoop/start.sh`
+  - either in daemon mode to use with APIs only: `docker run -d -t --dns 127.0.0.1 -e NODE_TYPE=n -e NNODES=2 -P --name master -h master.julia --entrypoint="/bin/bash" julialang/hadoop /hadoop/start.sh`
   - or, in interactive mode: `docker run -i -t --dns 127.0.0.1 -e NODE_TYPE=n -e NNODES=2 -P --name master -h master.julia julialang/hadoop`
-  - run `/hadoop/start.sh` in the docker container shell, when in interactive mode.
+    - and run `/hadoop/start.sh` in the docker container shell, when in interactive mode.
 2. Start the data nodes (as many as `NNODES`, each with different hostnames):
-`docker run -d -t --dns 127.0.0.1 -e NODE_TYPE=d -e JOIN_IP=master --link master:master --name slave1 -h slave1.julia julialang/hadoop /hadoop/start.sh`
+`docker run -d -t --dns 127.0.0.1 -e NODE_TYPE=d -e JOIN_IP=master --link master:master --name slave1 -h slave1.julia --entrypoint="/bin/bash" julialang/hadoop /hadoop/start.sh`
