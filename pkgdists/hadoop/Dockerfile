@@ -51,7 +51,7 @@ RUN apt-get install -y -o Dpkg::Options::="--force-confdef" -o DPkg::Options::="
     && apt-add-repository -y ppa:staticfloat/julianightlies \
     && add-apt-repository -y ppa:staticfloat/julia-deps \
     && apt-get update \
-    && apt-get install -y julia=0.4.0-2061~ubuntu14.04.1 \
+    && apt-get install -y julia \
     && apt-get clean
 
 # setup dnsmasq
@@ -95,6 +95,7 @@ ENV LD_LIBRARY_PATH /hadoop/hadoop-2.6.0/lib/native:/usr/lib/jvm/java-7-openjdk-
 ENV USER root
 
 ADD setenv.sh /hadoop/setenv.sh
+ADD onslaves.sh /hadoop/onslaves.sh
 ADD start.sh /hadoop/start.sh
 RUN echo ". /hadoop/setenv.sh" >> ~/.bashrc
 RUN echo ". /hadoop/setenv.sh" >> /hadoop/hadoop-2.6.0/etc/hadoop/hadoop-env.sh

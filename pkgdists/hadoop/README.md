@@ -29,3 +29,4 @@ docker tag julialang/hadoop:v0.4.0_build1 julialang/hadoop:latest
     - and run `/hadoop/start.sh` in the docker container shell, when in interactive mode.
 2. Start the data nodes (as many as `NNODES`, each with different hostnames):
 `docker run -d -t --dns 127.0.0.1 -e NODE_TYPE=d -e JOIN_IP=master --link master:master --name slave1 -h slave1.julia --entrypoint="/bin/bash" julialang/hadoop /hadoop/start.sh`
+3. Note: Script `cluster.sh` helps start/stop all nodes on one machine. Simply use `cluster.sh <start|stop> <num nodes>`.

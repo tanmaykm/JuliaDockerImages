@@ -33,8 +33,16 @@ elif [ "$NODE_TYPE" = "n" ]; then
     serf members | grep alive | cut -d" " -f1 > $HADOOP_PREFIX/etc/hadoop/slaves
     cp /hadoop/configs/cluster/nn-dn/* $HADOOP_PREFIX/etc/hadoop/
     $HADOOP_PREFIX/bin/hdfs namenode -format
+    ## format if we are starting fresh, else /data may be an earlier volume mounted here
+    #if [ "$(ls -A /data 2> /dev/null)" == "" ]; then
+    #    $HADOOP_PREFIX/bin/hdfs namenode -format
+    #fi
     $HADOOP_PREFIX/sbin/start-dfs.sh
     $HADOOP_PREFIX/sbin/start-yarn.sh
+    while true
+    do
+        sleep 300
+    done
 else
     echo "Starting standalone mode..."
     cp /hadoop/configs/single/* $HADOOP_PREFIX/etc/hadoop/
