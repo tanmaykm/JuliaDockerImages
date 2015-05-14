@@ -1,5 +1,5 @@
-# Official Ubuntu Docker file for Julia
-# Version:0.3.7-trusty1
+# Ubuntu Docker file for Julia
+# Version:v0.3.8
 
 FROM ubuntu:14.04
 
@@ -47,11 +47,11 @@ RUN git clone --recursive https://github.com/ipython/ipython.git; cd ipython; gi
 
 RUN pip install --upgrade PyDrive google-api-python-client jsonpointer jsonschema tornado sphinx pygments nose readline mistune
 
-RUN apt-get install -y -o Dpkg::Options::="--force-confdef" -o DPkg::Options::="--force-confold" apt-utils python-software-properties software-properties-common \
-    && apt-add-repository -y ppa:staticfloat/juliareleases \
-    && add-apt-repository -y ppa:staticfloat/julia-deps \
-    && apt-get update \
-    && apt-get install -y julia=0.3.7-trusty1 \
-    && apt-get clean
+RUN mkdir -p /opt/julia && \
+    curl -s -L https://status.julialang.org/stable/linux-x86_64 | tar -C /opt/julia -x -z --strip-components=1 -f -
+
+RUN echo "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/julia/bin\"" > /etc/environment && \
+    echo "export PATH" >> /etc/environment && \
+    echo "source /etc/environment" >> /root/.bashrc
 
 ENTRYPOINT /bin/bash

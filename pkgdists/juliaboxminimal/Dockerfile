@@ -1,8 +1,8 @@
 # Docker file for JuliaBox Minimal
 # Tag: julialang/juliaboxminpkgdist
-# Version:v0.3.7_build_1
+# Version:v0.3.8
 
-FROM julialang/julia:v0.3.7
+FROM julialang/julia:v0.3.8
 
 MAINTAINER Tanmay Mohapatra
 
@@ -45,8 +45,7 @@ RUN apt-get install -y \
 # SymPy
 RUN pip install --upgrade sympy
 
+ENV PATH /usr/local/texlive/2014/bin/x86_64-linux:/usr/local/bin:/usr/bin:/bin:/usr/games:/sbin:/usr/sbin:/opt/julia/bin
 ADD setup_julia.sh /tmp/setup_julia.sh
-
 RUN mkdir /.juliabox
-
 RUN /tmp/setup_julia.sh

@@ -47,12 +47,12 @@ RUN apt-get update \
     && apt-get clean
 
 # setup julia
-RUN apt-get install -y -o Dpkg::Options::="--force-confdef" -o DPkg::Options::="--force-confold" apt-utils python-software-properties software-properties-common \
-    && apt-add-repository -y ppa:staticfloat/julianightlies \
-    && add-apt-repository -y ppa:staticfloat/julia-deps \
-    && apt-get update \
-    && apt-get install -y julia \
-    && apt-get clean
+RUN mkdir -p /opt/julia && \
+    curl -s -L https://status.julialang.org/stable/linux-x86_64 | tar -C /opt/julia -x -z --strip-components=1 -f -
+
+RUN echo "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/julia/bin\"" > /etc/environment && \
+    echo "export PATH" >> /etc/environment && \
+    echo "source /etc/environment" >> /root/.bashrc
 
 # setup dnsmasq
 ADD dnsmasq/dnsmasq.conf /etc/dnsmasq.conf
@@ -103,6 +103,7 @@ RUN echo ". /hadoop/setenv.sh" >> /hadoop/hadoop-2.6.0/etc/hadoop/hadoop-env.sh
 ADD configs /hadoop/configs
 
 # install julia hadoop packages
+ENV PATH /usr/local/texlive/2014/bin/x86_64-linux:/usr/local/bin:/usr/bin:/bin:/usr/games:/sbin:/usr/sbin:/opt/julia/bin
 ADD setup_julia.sh /tmp/setup_julia.sh
 RUN /tmp/setup_julia.sh
 
