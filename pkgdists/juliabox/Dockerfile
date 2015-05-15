@@ -2,7 +2,7 @@
 # Tag: julialang/juliaboxpkgdist
 # Version:v0.3.8
 
-FROM julialang/juliaboxminimal:latest
+FROM julialang/juliaboxminpkgdist:v0.3.8
 
 MAINTAINER Tanmay Mohapatra
 
