@@ -1,43 +1,13 @@
-FROM ubuntu:14.04
+# Ubuntu Docker file for Julia with Hadoop
+# Version:v0.4.0_build3
+
+FROM julialang/julia:v0.4.0
 
 MAINTAINER Tanmay Mohapatra
 
 RUN apt-get update \
     && apt-get upgrade -y -o Dpkg::Options::="--force-confdef" -o DPkg::Options::="--force-confold" \
     && apt-get install -y \
-    man-db \
-    libc6 \
-    libc6-dev \
-    build-essential \
-    wget \
-    curl \
-    file \
-    vim \
-    screen \
-    tmux \
-    unzip \
-    pkg-config \
-    cmake \
-    gfortran \
-    gettext \
-    libreadline-dev \
-    libncurses-dev \
-    libpcre3-dev \
-    libgnutls28 \
-    python \
-    python-yaml \
-    python-m2crypto \
-    python-crypto \
-    msgpack-python \
-    python-dev \
-    python-setuptools \
-    supervisor \
-    python-zmq \
-    python-jinja2 \
-    python-requests \
-    python-isodate \
-    python-git \
-    python-pip \
     ssh \
     openjdk-7-jdk \
     dnsmasq \
@@ -45,14 +15,6 @@ RUN apt-get update \
     daemontools \
     libssl-dev \
     && apt-get clean
-
-# setup julia
-RUN mkdir -p /opt/julia && \
-    curl -s -L https://status.julialang.org/stable/linux-x86_64 | tar -C /opt/julia -x -z --strip-components=1 -f -
-
-RUN echo "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/julia/bin\"" > /etc/environment && \
-    echo "export PATH" >> /etc/environment && \
-    echo "source /etc/environment" >> /root/.bashrc
 
 # setup dnsmasq
 ADD dnsmasq/dnsmasq.conf /etc/dnsmasq.conf
