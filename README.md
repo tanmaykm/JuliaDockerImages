@@ -24,10 +24,10 @@ The default user in the image is `root` with home directory `/root`. The default
 
 Description                     | Image & Latest Version (julialang/...)
 --------------------------------|-----------------------------------------------------------------------------
-Base Julia                      | [julia:v0.3.7](https://registry.hub.docker.com/u/julialang/julia/)
-JuliaBox minimal package bundle | [juliaboxminpkgdist:v0.3.7_build_1](https://registry.hub.docker.com/u/julialang/juliaboxminpkgdist/)
-JuliaBox package bundle         | [juliaboxpkgdist:v0.3.7_build_1](https://registry.hub.docker.com/u/julialang/juliaboxpkgdist/)
-Julia Hadoop                    | [hadoop:v0.4.0_build1](https://registry.hub.docker.com/u/julialang/hadoop/)
+Base Julia                      | [julia:v0.3.8](https://registry.hub.docker.com/u/julialang/julia/)
+JuliaBox minimal package bundle | [juliaboxminpkgdist:v0.3.8](https://registry.hub.docker.com/u/julialang/juliaboxminpkgdist/)
+JuliaBox package bundle         | [juliaboxpkgdist:v0.3.8](https://registry.hub.docker.com/u/julialang/juliaboxpkgdist/)
+Julia Hadoop                    | [hadoop:v0.4.0_build3](https://registry.hub.docker.com/u/julialang/hadoop/)
 
 ## Contributing
 Please submit pull requests to update/add packages. As far as possible, please extend from an existing image specification to avoid duplication.

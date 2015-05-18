@@ -43,9 +43,9 @@ RUN apt-get update \
     python-pip \
     && apt-get clean
 
-RUN git clone --recursive https://github.com/ipython/ipython.git; cd ipython; git checkout 3.x; python setup.py install; cd ..; rm -rf ipython
+RUN pip install --upgrade PyDrive google-api-python-client jsonpointer jsonschema tornado sphinx pygments nose readline mistune invoke
 
-RUN pip install --upgrade PyDrive google-api-python-client jsonpointer jsonschema tornado sphinx pygments nose readline mistune
+RUN git clone --recursive --branch 3.x https://github.com/ipython/ipython.git; cd ipython; python setup.py install; cd ..; rm -rf ipython
 
 RUN mkdir -p /opt/julia_0.3.8 && \
     curl -s -L https://status.julialang.org/stable/linux-x86_64 | tar -C /opt/julia_0.3.8 -x -z --strip-components=1 -f -
