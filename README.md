@@ -15,7 +15,7 @@ Select the appropriate base Julia or a package distribution that matches your re
 
 ### Running
 - Run to get a shell prompt: `docker run -it <image>:<version>`
-- Run Julia: `docker run -it --entrypoint="/usr/bin/julia" <image>:<version>`
+- Run Julia: `docker run -it --entrypoint="/opt/julia/bin/julia" <image>:<version>`
 - Run IJulia: `docker run -it --net="host" --entrypoint="/usr/local/bin/ipython" <image>:<version> notebook --profile julia`
 
 The default user in the image is `root` with home directory `/root`. The default working directory is `/`.
