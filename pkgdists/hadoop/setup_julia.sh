@@ -11,6 +11,7 @@ done
 
 INTERNAL_PACKAGES="https://github.com/danielsuo/Crypto.jl.git \
 https://github.com/tanmaykm/Elly.jl.git \
+https://github.com/tanmaykm/HadoopBlocks.jl.git \
 https://github.com/tanmaykm/TeraSort.jl.git"
 
 for pkg in ${INTERNAL_PACKAGES}
