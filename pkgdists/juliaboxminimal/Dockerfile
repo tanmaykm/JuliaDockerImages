@@ -1,8 +1,8 @@
 # Docker file for JuliaBox Minimal
 # Tag: julialang/juliaboxminpkgdist
-# Version:v0.3.10
+# Version:v0.3.11
 
-FROM julialang/julia:v0.3.10
+FROM julialang/julia:v0.3.11
 
 MAINTAINER Tanmay Mohapatra
 

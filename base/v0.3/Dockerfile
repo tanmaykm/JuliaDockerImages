@@ -1,5 +1,5 @@
 # Ubuntu Docker file for Julia
-# Version:v0.3.10
+# Version:v0.3.11
 
 FROM ubuntu:14.04
 
@@ -47,10 +47,10 @@ RUN pip install --upgrade PyDrive google-api-python-client jsonpointer jsonschem
 
 RUN git clone --recursive --branch 3.x https://github.com/ipython/ipython.git; cd ipython; python setup.py install; cd ..; rm -rf ipython
 
-RUN mkdir -p /opt/julia_0.3.10 && \
-    curl -s -L https://status.julialang.org/stable/linux-x86_64 | tar -C /opt/julia_0.3.10 -x -z --strip-components=1 -f -
+RUN mkdir -p /opt/julia_0.3.11 && \
+    curl -s -L https://status.julialang.org/stable/linux-x86_64 | tar -C /opt/julia_0.3.11 -x -z --strip-components=1 -f -
 
-RUN ln -fs /opt/julia_0.3.10 /opt/julia
+RUN ln -fs /opt/julia_0.3.11 /opt/julia
 
 RUN echo "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/julia/bin\"" > /etc/environment && \
     echo "export PATH" >> /etc/environment && \
