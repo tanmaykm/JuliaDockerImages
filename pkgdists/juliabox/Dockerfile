@@ -72,8 +72,8 @@ RUN mkdir mpir; cd mpir; wget http://mpir.org/mpir-2.7.0-alpha11.tar.bz2; \
     cd ../..; \
     rm -rf mpir
 
-RUN mkdir mpfr; cd mpfr; wget http://www.mpfr.org/mpfr-current/mpfr-3.1.2.tar.bz2; \
-    tar -xvf mpfr-3.1.2.tar.bz2; cd mpfr-3.1.2; \
+RUN mkdir mpfr; cd mpfr; wget http://www.mpfr.org/mpfr-current/mpfr-3.1.3.tar.bz2; \
+    tar -xvf mpfr-3.1.3.tar.bz2; cd mpfr-3.1.3; \
     ./configure --with-gmp=/usr/local --disable-static --enable-shared; \
     make; make install; \
     cd ../..; \
