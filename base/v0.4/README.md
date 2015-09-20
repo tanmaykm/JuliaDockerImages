@@ -1,3 +1,7 @@
+Note: Images for other Julia versions also available. Replace desired version number in instructions below.
+
+See <https://github.com/tanmaykm/JuliaDockerImages> and <https://hub.docker.com/r/julialang/julia/tags/>
+
 ## Julia 0.4 Docker Image
 
 This docker image bundles: 

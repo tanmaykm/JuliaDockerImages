@@ -2,20 +2,20 @@ Note: Images for other Julia versions also available. Replace desired version nu
 
 See <https://github.com/tanmaykm/JuliaDockerImages> and <https://hub.docker.com/r/julialang/julia/tags/>
 
-## Julia 0.3 Docker Image
+## Julia 0.5 Docker Image
 
 This docker image bundles: 
-- Latest Julia 0.3.x
+- Latest Julia 0.5.x
 - IJulia
 
 image: julialang/julia
-version: 0.3.x (replace x with the latest minor version number)
+version: 0.5.x (replace x with the latest minor version number)
 
 ## Getting the image:
 
 To pull a pre-built image from dockerhub, run `docker pull <image>:<version>`
 
-Alternatively, to build locally, run `git clone https://github.com/tanmaykm/JuliaDockerImages.git && docker build -t julialang/julia:v0.3.x JuliaDockerImages/base/v0.3`
+Alternatively, to build locally, run `git clone https://github.com/tanmaykm/JuliaDockerImages.git && docker build -t julialang/julia:v0.5.x JuliaDockerImages/base/v0.5`
 
 ## Running
 
