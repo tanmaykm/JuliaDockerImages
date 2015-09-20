@@ -56,4 +56,6 @@ RUN echo "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/u
     echo "export PATH" >> /etc/environment && \
     echo "source /etc/environment" >> /root/.bashrc
 
+RUN /opt/julia/bin/julia -e 'Pkg.add("IJulia")'
+
 ENTRYPOINT /bin/bash
