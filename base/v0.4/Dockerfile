@@ -27,6 +27,8 @@ RUN apt-get update \
     libncurses-dev \
     libpcre3-dev \
     libgnutls28 \
+    libzmq3-dev \
+    libzmq3 \
     python \
     python-yaml \
     python-m2crypto \
@@ -35,7 +37,6 @@ RUN apt-get update \
     python-dev \
     python-setuptools \
     supervisor \
-    python-zmq \
     python-jinja2 \
     python-requests \
     python-isodate \
@@ -43,7 +44,7 @@ RUN apt-get update \
     python-pip \
     && apt-get clean
 
-RUN pip install --upgrade PyDrive google-api-python-client jsonpointer jsonschema tornado sphinx pygments nose readline mistune invoke
+RUN pip install --upgrade pyzmq PyDrive google-api-python-client jsonpointer jsonschema tornado sphinx pygments nose readline mistune invoke
 
 RUN git clone --recursive --branch 3.x https://github.com/ipython/ipython.git; cd ipython; python setup.py install; cd ..; rm -rf ipython
 
