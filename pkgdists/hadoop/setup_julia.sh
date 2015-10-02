@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEFAULT_PACKAGES="HDFS Logging StatsBase"
+DEFAULT_PACKAGES="HDFS Logging StatsBase DistributedArrays Blocks Elly"
 
 for pkg in ${DEFAULT_PACKAGES}
 do
@@ -10,9 +10,7 @@ do
 done
 
 INTERNAL_PACKAGES="https://github.com/danielsuo/Crypto.jl.git \
-https://github.com/tanmaykm/Elly.jl.git \
-https://github.com/tanmaykm/HadoopBlocks.jl.git \
-https://github.com/tanmaykm/TeraSort.jl.git"
+https://github.com/tanmaykm/HadoopBlocks.jl.git"
 
 for pkg in ${INTERNAL_PACKAGES}
 do

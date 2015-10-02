@@ -1,31 +1,33 @@
 ## Julia Hadoop Docker Image
 
 This docker image bundles: 
-- Hadoop 2.6.0 
+- Hadoop 2.7.1
 - Julia 0.4.0 
 - HDFS.jl
 - Elly.jl
+- Blocks.jl
+- DistributedArrays.jl
 
 The docker image can be used to easily setup a Hadoop cluster with Julia. It can also be conveniently run in standalone mode for building / testing Julia packages or code.
 It uses [serf](https://www.serfdom.io/) and [dnsmasq](http://en.wikipedia.org/wiki/Dnsmasq) to dynamically register nodes and create hadoop configuration.
 
-Note that since some of the Julia packages bundled are specific to Julia 0.4, this is based on the Julia 0.4 nightly build. While building this image locally, ensure 
-Dockerfile points to the correct Julia nightly build.
+Note that since some of the Julia packages bundled are specific to Julia 0.4, this is based on the Julia 0.4 release candidate build. While building this image locally, ensure 
+Dockerfile points to the correct Julia build.
 
 ## Getting the image:
 
 To pull a pre-built image from dockerhub, run:
 ````
-docker pull julialang/hadoop:v0.4.0_build4
-docker tag julialang/hadoop:v0.4.0_build4 julialang/hadoop:latest
+docker pull julialang/hadoop:v0.4.0
+docker tag julialang/hadoop:v0.4.0 julialang/hadoop:latest
 ````
 
 Alternatively, to build locally, run:
 ````
 git clone https://github.com/tanmaykm/JuliaDockerImages.git
 docker build -t julialang/julia:v0.4.0 JuliaDockerImages/base/v0.4
-docker build -t julialang/hadoop:v0.4.0_build4 JuliaDockerImages/pkgdists/hadoop
-docker tag julialang/hadoop:v0.4.0_build4 julialang/hadoop:latest
+docker build -t julialang/hadoop:v0.4.0 JuliaDockerImages/pkgdists/hadoop
+docker tag julialang/hadoop:v0.4.0 julialang/hadoop:latest
 ````
 
 ## Start standalone:

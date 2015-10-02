@@ -1,5 +1,5 @@
 # Ubuntu Docker file for Julia with Hadoop
-# Version:v0.4.0-rc1
+# Version:v0.4.0-rc3
 
 FROM julialang/julia:v0.4.0
 
@@ -47,20 +47,20 @@ RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' \
 RUN mkdir /hadoop \
     && mkdir /data \
     && cd /hadoop \
-    && wget http://apache.cs.utah.edu/hadoop/common/hadoop-2.6.0/hadoop-2.6.0.tar.gz \
-    && tar -xzf hadoop-2.6.0.tar.gz
+    && wget http://apache.cs.utah.edu/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz \
+    && tar -xzf hadoop-2.7.1.tar.gz
 
-ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/hadoop/hadoop-2.6.0/bin
-ENV HADOOP_PREFIX /hadoop/hadoop-2.6.0
+ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/hadoop/hadoop-2.7.1/bin
+ENV HADOOP_PREFIX /hadoop/hadoop-2.7.1
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
-ENV LD_LIBRARY_PATH /hadoop/hadoop-2.6.0/lib/native:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/server
+ENV LD_LIBRARY_PATH /hadoop/hadoop-2.7.1/lib/native:/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/server
 ENV USER root
 
 ADD setenv.sh /hadoop/setenv.sh
 ADD onslaves.sh /hadoop/onslaves.sh
 ADD start.sh /hadoop/start.sh
 RUN echo ". /hadoop/setenv.sh" >> ~/.bashrc
-RUN echo ". /hadoop/setenv.sh" >> /hadoop/hadoop-2.6.0/etc/hadoop/hadoop-env.sh
+RUN echo ". /hadoop/setenv.sh" >> /hadoop/hadoop-2.7.1/etc/hadoop/hadoop-env.sh
 
 ADD configs /hadoop/configs
 
