@@ -1,4 +1,4 @@
-export HADOOP_PREFIX=/hadoop/hadoop-2.6.0
+export HADOOP_PREFIX=/hadoop/hadoop-2.7.1
 
 export HADOOP_HOME=$HADOOP_PREFIX  
 export HADOOP_MAPRED_HOME=$HADOOP_PREFIX  
@@ -18,3 +18,6 @@ CLASSPATH3=$(JARS=("$HADOOP_PREFIX"/share/hadoop/hdfs/*.jar); IFS=:; echo "${JAR
 CLASSPATH4=$(JARS=("$HADOOP_PREFIX"/share/hadoop/hdfs/lib/*.jar); IFS=:; echo "${JARS[*]}")
 CLASSPATH5=$(JARS=("$HADOOP_PREFIX"/share/hadoop/tools/lib/*.jar); IFS=:; echo "${JARS[*]}")
 export CLASSPATH=${CLASSPATH1}:${CLASSPATH2}:${CLASSPATH3}:${CLASSPATH4}:${CLASSPATH}
+
+export SPARK_HOME=/spark/spark-1.5.1-bin-hadoop2.6
+export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin

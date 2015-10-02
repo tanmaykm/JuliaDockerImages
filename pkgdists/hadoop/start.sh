@@ -39,6 +39,11 @@ elif [ "$NODE_TYPE" = "n" ]; then
     #fi
     $HADOOP_PREFIX/sbin/start-dfs.sh
     $HADOOP_PREFIX/sbin/start-yarn.sh
+
+    serf members | grep alive | cut -d" " -f1 > $SPARK_HOME/conf/slaves
+    echo "Starting spark..."
+    $SPARK_HOME/sbin/start-all.sh
+
     while true
     do
         sleep 300
