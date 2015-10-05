@@ -32,17 +32,17 @@ elif [ "$NODE_TYPE" = "n" ]; then
     echo "master.julia" > $HADOOP_PREFIX/etc/hadoop/masters
     serf members | grep alive | cut -d" " -f1 > $HADOOP_PREFIX/etc/hadoop/slaves
     cp /hadoop/configs/cluster/nn-dn/* $HADOOP_PREFIX/etc/hadoop/
-    $HADOOP_PREFIX/bin/hdfs namenode -format
-    ## format if we are starting fresh, else /data may be an earlier volume mounted here
-    #if [ "$(ls -A /data 2> /dev/null)" == "" ]; then
-    #    $HADOOP_PREFIX/bin/hdfs namenode -format
-    #fi
+    #$HADOOP_PREFIX/bin/hdfs namenode -format
+    # format if we are starting fresh, else /data may be an earlier volume mounted here
+    if [ "$(ls -A /data 2> /dev/null)" == "" ]; then
+        $HADOOP_PREFIX/bin/hdfs namenode -format
+    fi
     $HADOOP_PREFIX/sbin/start-dfs.sh
     $HADOOP_PREFIX/sbin/start-yarn.sh
 
     serf members | grep alive | cut -d" " -f1 > $SPARK_HOME/conf/slaves
-    echo "Starting spark..."
-    $SPARK_HOME/sbin/start-all.sh
+    #echo "Starting spark..."
+    #$SPARK_HOME/sbin/start-all.sh
 
     while true
     do

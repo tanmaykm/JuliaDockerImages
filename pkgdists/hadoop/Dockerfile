@@ -68,12 +68,12 @@ ADD configs /hadoop/configs
 RUN apt-get install libatlas3-base libopenblas-base
 
 #ADD spark-1.5.1-bin-hadoop2.6.tgz /spark
-RUN mkdir /spark \
-    && cd /spark \
-    && wget http://d3kbcqa49mib13.cloudfront.net/spark-1.5.1-bin-hadoop2.6.tgz \
-    && tar -xzvf spark-1.5.1-bin-hadoop2.6.tgz
+#RUN mkdir /spark \
+#    && cd /spark \
+#    && wget http://d3kbcqa49mib13.cloudfront.net/spark-1.5.1-bin-hadoop2.6.tgz \
+#    && tar -xzvf spark-1.5.1-bin-hadoop2.6.tgz
 
-ENV SPARK_HOME /spark/spark-1.5.1-bin-hadoop2.6
+#ENV SPARK_HOME /spark/spark-1.5.1-bin-hadoop2.6
 
 # install julia hadoop packages
 ENV PATH /usr/local/texlive/2014/bin/x86_64-linux:/usr/local/bin:/usr/bin:/bin:/usr/games:/sbin:/usr/sbin:/opt/julia/bin
@@ -90,7 +90,7 @@ EXPOSE 9000 50010 50020 50070 50075 50090 50475
 EXPOSE 8030 8031 8032 8033 8040 8042 8060 8088 50060
 
 # SPARK ports
-EXPOSE 8080 7077
+#EXPOSE 8080 7077
 
 
 ENTRYPOINT /bin/bash

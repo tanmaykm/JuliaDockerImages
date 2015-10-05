@@ -14,5 +14,11 @@
     <property>
         <name>dfs.namenode.datanode.registration.ip-hostname-check</name>
         <value>false</value>
-    </property> 
+    </property>
+
+    <property>
+        <name>dfs.replication</name> 
+        <value>1</value> 
+        <description>Block Replication</description> 
+    </property>
 </configuration>
