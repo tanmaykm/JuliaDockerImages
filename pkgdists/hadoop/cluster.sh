@@ -24,7 +24,8 @@ if [ $1 == "start" ]
 then
     echo "Starting master..."
     echo "docker run -d -t --dns 127.0.0.1 -e NODE_TYPE=n -e NNODES=$TOTNODES -P --name master -h master.julia --entrypoint=\"/bin/bash\" julialang/hadoop /hadoop/start.sh"
-    docker run -d -t -v $DATASETS:/datastore -v $PERMSTORE/master:/data --dns 127.0.0.1 -e NODE_TYPE=n -e NNODES=$TOTNODES -P --name master -h master.julia --entrypoint="/bin/bash" julialang/hadoop /hadoop/start.sh
+    #docker run -d -t -v $DATASETS:/datastore -v $PERMSTORE/master:/data --dns 127.0.0.1 -e NODE_TYPE=n -e NNODES=$TOTNODES -P --name master -h master.julia --entrypoint="/bin/bash" julialang/hadoop /hadoop/start.sh
+    docker run -d -t -v $DATASETS:/datastore --dns 127.0.0.1 -e NODE_TYPE=n -e NNODES=$TOTNODES -P --name master -h master.julia --entrypoint="/bin/bash" julialang/hadoop /hadoop/start.sh
     echo "Copying the masker ssh key into ./id_rsa"
     docker cp master:/root/.ssh/id_rsa .
     chmod 400 ./id_rsa
@@ -33,7 +34,8 @@ then
     for NNUM in `seq 1 $NNODES`
     do
         echo "    slave$NNUM..."
-        docker run -d -t -v $PERMSTORE/slave$NNUM:/data --dns 127.0.0.1 -e NODE_TYPE=d -e JOIN_IP=master --link master:master --name slave$NNUM -h slave${NNUM}.julia --entrypoint="/bin/bash" julialang/hadoop /hadoop/start.sh
+        #docker run -d -t -v $PERMSTORE/slave$NNUM:/data --dns 127.0.0.1 -e NODE_TYPE=d -e JOIN_IP=master --link master:master --name slave$NNUM -h slave${NNUM}.julia --entrypoint="/bin/bash" julialang/hadoop /hadoop/start.sh
+        docker run -d -t --dns 127.0.0.1 -e NODE_TYPE=d -e JOIN_IP=master --link master:master --name slave$NNUM -h slave${NNUM}.julia --entrypoint="/bin/bash" julialang/hadoop /hadoop/start.sh
     done
 
     SSHPORT=`docker inspect master | { echo -; echo; cat; } | awk -f JSON.awk | grep HostPort | grep "22/tcp" | cut -d"]" -f2 | cut -d"\"" -f2`
