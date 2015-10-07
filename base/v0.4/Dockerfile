@@ -49,7 +49,7 @@ RUN pip install --upgrade pyzmq PyDrive google-api-python-client jsonpointer jso
 RUN git clone --recursive --branch 3.x https://github.com/ipython/ipython.git; cd ipython; python setup.py install; cd ..; rm -rf ipython
 
 RUN mkdir -p /opt/julia_0.4.0 && \
-    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.4/julia-0.4.0-rc3-linux-x86_64.tar.gz | tar -C /opt/julia_0.4.0 -x -z --strip-components=1 -f -
+    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.4/julia-0.4.0-rc4-linux-x86_64.tar.gz | tar -C /opt/julia_0.4.0 -x -z --strip-components=1 -f -
 
 RUN ln -fs /opt/julia_0.4.0 /opt/julia
 
