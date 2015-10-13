@@ -57,6 +57,7 @@ collection-publishers 0
 collection-science 1
 collection-texworks 1
 collection-xetex 0
+collection-xunicode 1
 in_place 0
 option_adjustrepo 1
 option_autobackup 1
