@@ -86,6 +86,13 @@ RUN mkdir flint2; cd flint2; git clone https://github.com/wbhart/flint2.git; \
     cd ../..; \
     rm -rf flint2
 
+# RCall
+RUN apt-get install -y \
+    r-base \
+    r-base-dev \
+    r-recommended \
+    && apt-get clean
+
 ADD setup_julia.sh /tmp/setup_julia.sh
 
 RUN /tmp/setup_julia.sh
