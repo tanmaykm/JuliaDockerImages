@@ -87,7 +87,12 @@ RUN mkdir flint2; cd flint2; git clone https://github.com/wbhart/flint2.git; \
     rm -rf flint2
 
 # RCall
-RUN apt-get install -y \
+RUN apt-get install -y software-properties-common \
+    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9 \
+    && add-apt-repository -y "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" \
+    && apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y \
     r-base \
     r-base-dev \
     r-recommended \
