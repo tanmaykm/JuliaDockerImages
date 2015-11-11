@@ -1,5 +1,5 @@
 # Ubuntu Docker file for Julia
-# Version:v0.4
+# Version:v0.4.1
 
 FROM ubuntu:14.04
 
@@ -48,15 +48,16 @@ RUN pip install --upgrade pyzmq PyDrive google-api-python-client jsonpointer jso
 
 RUN git clone --recursive --branch 3.x https://github.com/ipython/ipython.git; cd ipython; python setup.py install; cd ..; rm -rf ipython
 
-RUN mkdir -p /opt/julia_0.4.0 && \
-    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.4/julia-0.4.0-linux-x86_64.tar.gz | tar -C /opt/julia_0.4.0 -x -z --strip-components=1 -f -
+RUN mkdir -p /opt/julia_0.4.1 && \
+    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.4/julia-0.4.1-linux-x86_64.tar.gz | tar -C /opt/julia_0.4.1 -x -z --strip-components=1 -f -
 
-RUN ln -fs /opt/julia_0.4.0 /opt/julia
+RUN ln -fs /opt/julia_0.4.1 /opt/julia
 
 RUN echo "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/julia/bin\"" > /etc/environment && \
     echo "export PATH" >> /etc/environment && \
     echo "source /etc/environment" >> /root/.bashrc
 
 RUN /opt/julia/bin/julia -e 'Pkg.add("IJulia")'
+RUN /opt/julia/bin/julia -e 'Pkg.build("IJulia")'
 
 ENTRYPOINT /bin/bash
