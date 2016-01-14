@@ -2,7 +2,7 @@
 
 This docker image bundles: 
 - Hadoop 2.7.1
-- Julia 0.4.0 
+- Julia 0.4
 - HDFS.jl
 - Elly.jl
 - Blocks.jl
@@ -15,16 +15,16 @@ It uses [serf](https://www.serfdom.io/) and [dnsmasq](http://en.wikipedia.org/wi
 
 To pull a pre-built image from dockerhub, run:
 ````
-docker pull julialang/hadoop:v0.4.0
-docker tag julialang/hadoop:v0.4.0 julialang/hadoop:latest
+docker pull julialang/hadoop:v0.4.3
+docker tag julialang/hadoop:v0.4.3 julialang/hadoop:latest
 ````
 
 Alternatively, to build locally, run:
 ````
 git clone https://github.com/tanmaykm/JuliaDockerImages.git
-docker build -t julialang/julia:v0.4.0 JuliaDockerImages/base/v0.4
-docker build -t julialang/hadoop:v0.4.0 JuliaDockerImages/pkgdists/hadoop
-docker tag julialang/hadoop:v0.4.0 julialang/hadoop:latest
+docker build -t julialang/julia:v0.4.3 JuliaDockerImages/base/v0.4
+docker build -t julialang/hadoop:v0.4.3 JuliaDockerImages/pkgdists/hadoop
+docker tag julialang/hadoop:v0.4.3 julialang/hadoop:latest
 ````
 
 ## Start standalone:

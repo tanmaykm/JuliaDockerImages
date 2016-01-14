@@ -1,7 +1,7 @@
 # Ubuntu Docker file for Julia with Hadoop
-# Version:v0.4.2
+# Version:v0.4.3
 
-FROM julialang/julia:v0.4.2
+FROM julialang/julia:v0.4.3
 
 MAINTAINER Tanmay Mohapatra
 
