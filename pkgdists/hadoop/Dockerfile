@@ -21,10 +21,10 @@ ADD dnsmasq/dnsmasq.conf /etc/dnsmasq.conf
 ADD dnsmasq/resolv.dnsmasq.conf /etc/resolv.dnsmasq.conf
 
 # setup serf
-RUN wget https://dl.bintray.com/mitchellh/serf/0.6.4_linux_amd64.zip \
-    && unzip 0.6.4_linux_amd64.zip \
+RUN wget https://releases.hashicorp.com/serf/0.7.0/serf_0.7.0_linux_amd64.zip \
+    && unzip serf_0.7.0_linux_amd64.zip \
     && mv serf /bin \
-    && rm 0.6.4_linux_amd64.zip
+    && rm serf_0.7.0_linux_amd64.zip
 ADD serf /etc/serf
 ENV SERF_CONFIG_DIR /etc/serf
 
