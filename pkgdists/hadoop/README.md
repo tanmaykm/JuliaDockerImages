@@ -15,16 +15,16 @@ It uses [serf](https://www.serfdom.io/) and [dnsmasq](http://en.wikipedia.org/wi
 
 To pull a pre-built image from dockerhub, run:
 ````
-docker pull julialang/hadoop:v0.4.3
-docker tag julialang/hadoop:v0.4.3 julialang/hadoop:latest
+docker pull julialang/hadoop:v0.4.5
+docker tag julialang/hadoop:v0.4.5 julialang/hadoop:latest
 ````
 
 Alternatively, to build locally, run:
 ````
 git clone https://github.com/tanmaykm/JuliaDockerImages.git
-docker build -t julialang/julia:v0.4.3 JuliaDockerImages/base/v0.4
-docker build -t julialang/hadoop:v0.4.3 JuliaDockerImages/pkgdists/hadoop
-docker tag julialang/hadoop:v0.4.3 julialang/hadoop:latest
+docker build -t julialang/julia:v0.4.5 JuliaDockerImages/base/v0.4
+docker build -t julialang/hadoop:v0.4.5 JuliaDockerImages/pkgdists/hadoop
+docker tag julialang/hadoop:v0.4.5 julialang/hadoop:latest
 ````
 
 ## Start standalone:
