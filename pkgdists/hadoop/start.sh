@@ -13,6 +13,9 @@
 # - Start the data nodes (as many as NNODES, with different hostnames):
 #   docker run -d -t --dns 127.0.0.1 -e NODE_TYPE=d -e JOIN_IP=master --link master:master --name slave1 -h slave1.julia julialang/hadoop /hadoop/start.sh
 
+echo "Starting sshd..."
+service ssh start
+
 if [ "$NODE_TYPE" = "d" ]; then
     echo "Starting datanode..."
     cp /hadoop/configs/cluster/dn/* $HADOOP_PREFIX/etc/hadoop/

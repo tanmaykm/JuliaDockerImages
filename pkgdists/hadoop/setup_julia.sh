@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo ""
+echo "Updating METADATA..."
+julia -e "Pkg.update()"
+
 DEFAULT_PACKAGES="HDFS Logging StatsBase DistributedArrays Blocks Elly"
 
 for pkg in ${DEFAULT_PACKAGES}
