@@ -20,23 +20,22 @@ echo "Will $1 $TOTNODES nodes with $NNODES slaves"
 
 if [ $1 == "start" ]
 then
-    echo "Starting master..."
-    echo "docker run -d -t --dns 127.0.0.1 -e NODE_TYPE=n -e NNODES=$TOTNODES -P --name master -h master.julia --entrypoint=\"/bin/bash\" julialang/hadoop /hadoop/start.sh"
-    docker run -d -t --dns 127.0.0.1 -e NODE_TYPE=n -e NNODES=$TOTNODES -P --name master -h master.julia --entrypoint="/bin/bash" julialang/hadoop /hadoop/start.sh
-    echo "Copying the masker ssh key into ./id_rsa"
-    docker cp master:/root/.ssh/id_rsa .
-    chmod 400 ./id_rsa
+    echo "Creating network..."
+    docker network create julia
 
     echo "Starting slaves..."
     for NNUM in `seq 1 $NNODES`
     do
         echo "    slave$NNUM..."
-        docker run -d -t --dns 127.0.0.1 -e NODE_TYPE=d -e JOIN_IP=master --link master:master --name slave$NNUM -h slave${NNUM}.julia --entrypoint="/bin/bash" julialang/hadoop /hadoop/start.sh
+        docker run -d -t --net julia -e NODE_TYPE=d --name slave${NNUM} -h slave${NNUM}.julia --entrypoint /hadoop/start.sh julialang/hadoop
     done
 
-    SSHPORT=`docker inspect master | { echo -; echo; cat; } | awk -f JSON.awk | grep HostPort | grep "22/tcp" | cut -d"]" -f2 | cut -d"\"" -f2`
+    sleep 5
+    echo "Starting master..."
+    docker run -d -t --net julia -e NODE_TYPE=n -e NNODES=$NNODES -P --name master -h master.julia --entrypoint /hadoop/start.sh julialang/hadoop
+
     echo "To log in to master node:"
-    echo "ssh -i ${PWD}/id_rsa -p ${SSHPORT} root@localhost"
+    echo "docker exec -it master /bin/bash"
 else
     echo "Stopping $TOTNODES nodes with $NNODES slaves"
 
@@ -47,15 +46,6 @@ else
         docker rm master
     else
         echo "    master not running"
-    fi
-
-    if [ -f ./id_rsa ]
-    then
-        chmod +w ./id_rsa
-        echo "Removing the master ssh key"
-        rm ./id_rsa
-    else
-        echo "No ssh master key file to be removed"
     fi
 
     echo "Stopping slaves..."

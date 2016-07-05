@@ -10,27 +10,10 @@ RUN apt-get update \
     && apt-get install -y \
     ssh \
     openjdk-7-jdk \
-    dnsmasq \
     iputils-ping \
     daemontools \
     libssl-dev \
     && apt-get clean
-
-# setup dnsmasq
-ADD dnsmasq/dnsmasq.conf /etc/dnsmasq.conf
-ADD dnsmasq/resolv.dnsmasq.conf /etc/resolv.dnsmasq.conf
-
-# setup serf
-RUN wget https://releases.hashicorp.com/serf/0.7.0/serf_0.7.0_linux_amd64.zip \
-    && unzip serf_0.7.0_linux_amd64.zip \
-    && mv serf /bin \
-    && rm serf_0.7.0_linux_amd64.zip
-ADD serf /etc/serf
-ENV SERF_CONFIG_DIR /etc/serf
-
-# configure service startups
-RUN mkdir -p /var/run/sshd
-ADD svc /etc/service
 
 # setup hduser to run hadoop
 RUN addgroup hadoop
@@ -44,8 +27,9 @@ RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' \
     && rm /tmp/ssh_config
 
 # setup hadoop
+RUN mkdir /data
+#ADD hadoop-2.7.1.tar.gz /hadoop
 RUN mkdir /hadoop \
-    && mkdir /data \
     && cd /hadoop \
     && wget http://apache.cs.utah.edu/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz \
     && tar -xzf hadoop-2.7.1.tar.gz
@@ -57,7 +41,6 @@ ENV LD_LIBRARY_PATH /hadoop/hadoop-2.7.1/lib/native:/usr/lib/jvm/java-7-openjdk-
 ENV USER root
 
 ADD setenv.sh /hadoop/setenv.sh
-ADD onslaves.sh /hadoop/onslaves.sh
 ADD start.sh /hadoop/start.sh
 RUN echo ". /hadoop/setenv.sh" >> ~/.bashrc
 RUN echo ". /hadoop/setenv.sh" >> /hadoop/hadoop-2.7.1/etc/hadoop/hadoop-env.sh
