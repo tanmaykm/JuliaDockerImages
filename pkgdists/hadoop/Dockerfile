@@ -1,7 +1,7 @@
 # Ubuntu Docker file for Julia with Hadoop
-# Version:v0.4.5
+# Version:v0.4.6
 
-FROM julialang/julia:v0.4.5
+FROM julialang/julia:v0.4.6
 
 MAINTAINER Tanmay Mohapatra
 
@@ -10,27 +10,10 @@ RUN apt-get update \
     && apt-get install -y \
     ssh \
     openjdk-7-jdk \
-    dnsmasq \
     iputils-ping \
     daemontools \
     libssl-dev \
     && apt-get clean
-
-# setup dnsmasq
-ADD dnsmasq/dnsmasq.conf /etc/dnsmasq.conf
-ADD dnsmasq/resolv.dnsmasq.conf /etc/resolv.dnsmasq.conf
-
-# setup serf
-RUN wget https://releases.hashicorp.com/serf/0.7.0/serf_0.7.0_linux_amd64.zip \
-    && unzip serf_0.7.0_linux_amd64.zip \
-    && mv serf /bin \
-    && rm serf_0.7.0_linux_amd64.zip
-ADD serf /etc/serf
-ENV SERF_CONFIG_DIR /etc/serf
-
-# configure service startups
-RUN mkdir -p /var/run/sshd
-ADD svc /etc/service
 
 # setup hduser to run hadoop
 RUN addgroup hadoop
@@ -44,8 +27,9 @@ RUN ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' \
     && rm /tmp/ssh_config
 
 # setup hadoop
+RUN mkdir /data
+#ADD hadoop-2.7.1.tar.gz /hadoop
 RUN mkdir /hadoop \
-    && mkdir /data \
     && cd /hadoop \
     && wget http://apache.cs.utah.edu/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz \
     && tar -xzf hadoop-2.7.1.tar.gz
@@ -57,7 +41,6 @@ ENV LD_LIBRARY_PATH /hadoop/hadoop-2.7.1/lib/native:/usr/lib/jvm/java-7-openjdk-
 ENV USER root
 
 ADD setenv.sh /hadoop/setenv.sh
-ADD onslaves.sh /hadoop/onslaves.sh
 ADD start.sh /hadoop/start.sh
 RUN echo ". /hadoop/setenv.sh" >> ~/.bashrc
 RUN echo ". /hadoop/setenv.sh" >> /hadoop/hadoop-2.7.1/etc/hadoop/hadoop-env.sh
@@ -67,13 +50,20 @@ ADD configs /hadoop/configs
 # setup spark
 RUN apt-get install libatlas3-base libopenblas-base
 
-#ADD spark-1.5.1-bin-hadoop2.6.tgz /spark
+#ADD spark-1.6.2-bin-hadoop2.6.tgz /spark
 RUN mkdir /spark \
     && cd /spark \
-    && wget http://d3kbcqa49mib13.cloudfront.net/spark-1.5.1-bin-hadoop2.6.tgz \
-    && tar -xzvf spark-1.5.1-bin-hadoop2.6.tgz
+    && wget http://www-us.apache.org/dist/spark/spark-1.6.2/spark-1.6.2-bin-hadoop2.6.tgz \
+    && tar -xzvf spark-1.6.2-bin-hadoop2.6.tgz
 
-ENV SPARK_HOME /spark/spark-1.5.1-bin-hadoop2.6
+ENV SPARK_HOME /spark/spark-1.6.2-bin-hadoop2.6
+
+# setup hive
+#ADD apache-hive-1.2.1-bin.tar.gz /hive
+RUN mkdir /hive \
+    && cd /hive \
+    && wget http://www-us.apache.org/dist/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz \
+    && tar -xzvf apache-hive-1.2.1-bin.tar.gz
 
 # install julia hadoop packages
 ENV PATH /usr/local/texlive/2014/bin/x86_64-linux:/usr/local/bin:/usr/bin:/bin:/usr/games:/sbin:/usr/sbin:/opt/julia/bin
