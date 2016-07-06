@@ -33,6 +33,8 @@ elif [ "$NODE_TYPE" = "n" ]; then
     do
         echo "slave${idx}.julia" >> $HADOOP_PREFIX/etc/hadoop/slaves
     done
+
+    cp /hadoop/configs/hive/* $HIVE_HOME/conf/
     cp /hadoop/configs/cluster/nn-dn/* $HADOOP_PREFIX/etc/hadoop/
     $HADOOP_PREFIX/bin/hdfs namenode -format
     ## format if we are starting fresh, else /data may be an earlier volume mounted here
@@ -57,6 +59,7 @@ elif [ "$NODE_TYPE" = "n" ]; then
     done
 else
     echo "Starting standalone mode..."
+    cp /hadoop/configs/hive/* $HIVE_HOME/conf/
     cp /hadoop/configs/single/* $HADOOP_PREFIX/etc/hadoop/
     $HADOOP_PREFIX/bin/hdfs namenode -format
     $HADOOP_PREFIX/sbin/start-dfs.sh

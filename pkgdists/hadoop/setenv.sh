@@ -21,3 +21,5 @@ export CLASSPATH=${CLASSPATH1}:${CLASSPATH2}:${CLASSPATH3}:${CLASSPATH4}:${CLASS
 
 export SPARK_HOME=/spark/spark-1.6.2-bin-hadoop2.6
 export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+
+export HIVE_HOME=/hive/apache-hive-1.2.1-bin

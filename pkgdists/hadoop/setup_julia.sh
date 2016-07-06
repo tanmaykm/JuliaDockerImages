@@ -4,7 +4,7 @@ echo ""
 echo "Updating METADATA..."
 julia -e "Pkg.update()"
 
-DEFAULT_PACKAGES="HDFS Logging StatsBase DistributedArrays Elly"
+DEFAULT_PACKAGES="HDFS Logging StatsBase DistributedArrays Elly Hive"
 
 for pkg in ${DEFAULT_PACKAGES}
 do

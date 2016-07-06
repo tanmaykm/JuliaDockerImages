@@ -58,6 +58,13 @@ RUN mkdir /spark \
 
 ENV SPARK_HOME /spark/spark-1.6.2-bin-hadoop2.6
 
+# setup hive
+#ADD apache-hive-1.2.1-bin.tar.gz /hive
+RUN mkdir /hive \
+    && cd /hive \
+    && wget http://www-us.apache.org/dist/hive/hive-1.2.1/apache-hive-1.2.1-bin.tar.gz \
+    && tar -xzvf apache-hive-1.2.1-bin.tar.gz
+
 # install julia hadoop packages
 ENV PATH /usr/local/texlive/2014/bin/x86_64-linux:/usr/local/bin:/usr/bin:/bin:/usr/games:/sbin:/usr/sbin:/opt/julia/bin
 ADD setup_julia.sh /tmp/setup_julia.sh
