@@ -21,4 +21,4 @@ Alternatively, to build locally, run `git clone https://github.com/tanmaykm/Juli
 
 - Run to get a shell prompt: docker run -it <image>:<version>
 - Run Julia: docker run -it --entrypoint="/opt/julia/bin/julia" <image>:<version>
-- Run Jupyter: docker run -it --net="host" --entrypoint="/usr/local/bin/jupyter" <image>:<version> notebook --profile julia
+- Run Jupyter: docker run -it --net="host" --entrypoint="/usr/local/bin/jupyter" <image>:<version> notebook
