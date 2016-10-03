@@ -1,5 +1,5 @@
 # Ubuntu Docker file for Julia
-# Version:v0.4.6
+# Version:v0.4.7
 
 FROM ubuntu:14.04
 
@@ -46,12 +46,11 @@ RUN apt-get update \
 
 RUN pip install --upgrade pyzmq PyDrive google-api-python-client jsonpointer jsonschema tornado sphinx pygments nose readline mistune invoke
 
-RUN git clone --recursive --branch 3.x https://github.com/ipython/ipython.git; cd ipython; python setup.py install; cd ..; rm -rf ipython
+RUN git clone --recursive --branch 4.2.x https://github.com/jupyter/notebook; cd notebook; python setup.py install; cd ..; rm -rf notebook
 
-RUN mkdir -p /opt/julia_0.4.6 && \
-    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.4/julia-0.4.6-linux-x86_64.tar.gz | tar -C /opt/julia_0.4.6 -x -z --strip-components=1 -f -
-
-RUN ln -fs /opt/julia_0.4.6 /opt/julia
+RUN mkdir -p /opt/julia-0.4.7 && \
+    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.4/julia-0.4.7-linux-x86_64.tar.gz | tar -C /opt/julia-0.4.7 -x -z --strip-components=1 -f -
+RUN ln -fs /opt/julia-0.4.7 /opt/julia
 
 RUN echo "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/julia/bin\"" > /etc/environment && \
     echo "export PATH" >> /etc/environment && \
