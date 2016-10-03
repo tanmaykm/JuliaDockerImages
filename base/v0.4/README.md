@@ -6,7 +6,7 @@ See <https://github.com/tanmaykm/JuliaDockerImages> and <https://hub.docker.com/
 
 This docker image bundles: 
 - Latest Julia 0.4.x
-- IJulia
+- Jupyter 4.2.x
 
 image: julialang/julia
 version: 0.4.x (replace x with the latest minor version number)
@@ -21,4 +21,4 @@ Alternatively, to build locally, run `git clone https://github.com/tanmaykm/Juli
 
 - Run to get a shell prompt: docker run -it <image>:<version>
 - Run Julia: docker run -it --entrypoint="/opt/julia/bin/julia" <image>:<version>
-- Run IJulia: docker run -it --net="host" --entrypoint="/usr/local/bin/ipython" <image>:<version> notebook --profile julia
+- Run Jupyter: docker run -it --net="host" --entrypoint="/usr/local/bin/jupyter" <image>:<version> notebook --profile julia
