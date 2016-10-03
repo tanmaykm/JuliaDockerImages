@@ -1,5 +1,5 @@
 # Ubuntu Docker file for Julia
-# Version:v0.5
+# Version:v0.5.0
 
 FROM ubuntu:14.04
 
@@ -27,6 +27,8 @@ RUN apt-get update \
     libncurses-dev \
     libpcre3-dev \
     libgnutls28 \
+    libzmq3-dev \
+    libzmq3 \
     python \
     python-yaml \
     python-m2crypto \
@@ -35,7 +37,6 @@ RUN apt-get update \
     python-dev \
     python-setuptools \
     supervisor \
-    python-zmq \
     python-jinja2 \
     python-requests \
     python-isodate \
@@ -43,19 +44,23 @@ RUN apt-get update \
     python-pip \
     && apt-get clean
 
-RUN pip install --upgrade PyDrive google-api-python-client jsonpointer jsonschema tornado sphinx pygments nose readline mistune invoke
+RUN pip install --upgrade pyzmq PyDrive google-api-python-client jsonpointer jsonschema tornado sphinx pygments nose readline mistune invoke
 
-RUN git clone --recursive --branch 3.x https://github.com/ipython/ipython.git; cd ipython; python setup.py install; cd ..; rm -rf ipython
+RUN pip install 'notebook==4.2'
 
-RUN mkdir -p /opt/julia_0.5.0 && \
-    curl -s -L https://status.julialang.org/download/linux-x86_64 | tar -C /opt/julia_0.5.0 -x -z --strip-components=1 -f -
+# Install julia 0.5
+RUN mkdir -p /opt/julia-0.5.0 && \
+    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.0-linux-x86_64.tar.gz | tar -C /opt/julia-0.5.0 -x -z --strip-components=1 -f -
+RUN ln -fs /opt/julia-0.5.0 /opt/julia-0.5
 
-RUN ln -fs /opt/julia_0.5.0 /opt/julia
+# Make v0.5 default julia
+RUN ln -fs /opt/julia-0.5.0 /opt/julia
 
 RUN echo "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/julia/bin\"" > /etc/environment && \
     echo "export PATH" >> /etc/environment && \
     echo "source /etc/environment" >> /root/.bashrc
 
 RUN /opt/julia/bin/julia -e 'Pkg.add("IJulia")'
+RUN /opt/julia/bin/julia -e 'Pkg.build("IJulia")'
 
 ENTRYPOINT /bin/bash

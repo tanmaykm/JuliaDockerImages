@@ -9,7 +9,7 @@ This docker image bundles:
 - Jupyter 4.2.x
 
 image: julialang/julia
-version: latest (replace x with the latest minor version number)
+version: latest
 
 ## Getting the image:
 
