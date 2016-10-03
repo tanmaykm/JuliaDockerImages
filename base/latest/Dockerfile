@@ -48,6 +48,8 @@ RUN pip install --upgrade pyzmq PyDrive google-api-python-client jsonpointer jso
 
 RUN pip install 'notebook==4.2'
 
+pip install 'rise==4.0.0b1'; jupyter-nbextension install rise --py --sys-prefix; jupyter-nbextension enable rise --py --sys-prefix
+
 # Install julia 0.3
 RUN mkdir -p /opt/julia-0.3.12 && \
     curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.3/julia-0.3.12-linux-x86_64.tar.gz | tar -C /opt/julia-0.3.12 -x -z --strip-components=1 -f -
