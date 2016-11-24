@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+  slurmctld:
+    environment:
+      SLURM_CLUSTER_NAME: juliaslurm
+      SLURM_CONTROL_MACHINE: slurmctld
+      SLURM_NODE_NAMES: slurmd
+    tty: true
+    hostname: slurmctld
+    image: julialang/juliaslurmctld:latest
+    links:
+    - slurmd:SLURM_NODES
+    stdin_open: true
+    networks:
+      slurm:
+        aliases:
+          - slurmctld
+  slurmd:
+    environment:
+      SLURM_CONTROL_MACHINE: slurmctld
+      SLURM_CLUSTER_NAME: juliaslurm
+      SLURM_NODE_NAMES: slurmd
+    tty: true
+    hostname: slurmd
+    image: julialang/juliaslurmd:latest
+    stdin_open: true
+    networks:
+      slurm:
+        aliases:
+          - slurmd
+networks:
+  slurm:
