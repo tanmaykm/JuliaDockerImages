@@ -48,6 +48,8 @@ RUN pip install --upgrade pyzmq PyDrive google-api-python-client jsonpointer jso
 
 RUN pip install 'notebook==4.2'
 
+RUN pip install ipywidgets; jupyter nbextension enable --py --sys-prefix widgetsnbextension
+
 RUN pip install 'rise==4.0.0b1'; jupyter-nbextension install rise --py --sys-prefix; jupyter-nbextension enable rise --py --sys-prefix
 
 # Install julia 0.3
