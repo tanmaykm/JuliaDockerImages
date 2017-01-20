@@ -52,8 +52,8 @@ RUN apt-get install -y \
     && apt-get clean
 
 # Stan
-RUN mkdir stan && cd stan && wget https://github.com/stan-dev/cmdstan/releases/download/v2.5.0/cmdstan-2.5.0.tar.gz && \
-    tar -xzvf cmdstan-2.5.0.tar.gz && mv cmdstan /usr/share/cmdstan && \
+RUN mkdir stan && cd stan && wget https://github.com/stan-dev/cmdstan/releases/download/v2.14.0/cmdstan-2.14.0.tar.gz && \
+    tar -xzvf cmdstan-2.14.0.tar.gz && mv cmdstan /usr/share/cmdstan && \
     (cd /usr/share/cmdstan && make build) && \
     echo "export CMDSTAN_HOME=/usr/share/cmdstan" > /etc/profile.d/cmdstan.sh && \
     chmod 755 /etc/profile.d/cmdstan.sh && \
