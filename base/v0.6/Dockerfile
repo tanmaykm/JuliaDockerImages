@@ -1,7 +1,7 @@
 # Ubuntu Docker file for Julia
 # Version:v0.6.0-dev
 
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 MAINTAINER Tanmay Mohapatra
 
@@ -26,9 +26,9 @@ RUN apt-get update \
     libreadline-dev \
     libncurses-dev \
     libpcre3-dev \
-    libgnutls28 \
+    libgnutls30 \
     libzmq3-dev \
-    libzmq3 \
+    libzmq5 \
     python \
     python-yaml \
     python-m2crypto \

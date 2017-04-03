@@ -1,7 +1,7 @@
 # Ubuntu Docker file for Julia
-# Version:v0.5.0
+# Version:v0.5.1
 
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 MAINTAINER Tanmay Mohapatra
 
@@ -26,9 +26,9 @@ RUN apt-get update \
     libreadline-dev \
     libncurses-dev \
     libpcre3-dev \
-    libgnutls28 \
+    libgnutls30 \
     libzmq3-dev \
-    libzmq3 \
+    libzmq5 \
     python \
     python-yaml \
     python-m2crypto \
@@ -49,12 +49,12 @@ RUN pip install --upgrade pyzmq PyDrive google-api-python-client jsonpointer jso
 RUN pip install 'notebook==4.2'
 
 # Install julia 0.5
-RUN mkdir -p /opt/julia-0.5.0 && \
-    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.0-linux-x86_64.tar.gz | tar -C /opt/julia-0.5.0 -x -z --strip-components=1 -f -
-RUN ln -fs /opt/julia-0.5.0 /opt/julia-0.5
+RUN mkdir -p /opt/julia-0.5.1 && \
+    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.1-linux-x86_64.tar.gz | tar -C /opt/julia-0.5.1 -x -z --strip-components=1 -f -
+RUN ln -fs /opt/julia-0.5.1 /opt/julia-0.5
 
 # Make v0.5 default julia
-RUN ln -fs /opt/julia-0.5.0 /opt/julia
+RUN ln -fs /opt/julia-0.5.1 /opt/julia
 
 RUN echo "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/julia/bin\"" > /etc/environment && \
     echo "export PATH" >> /etc/environment && \
