@@ -69,15 +69,15 @@ RUN ln -fs /opt/julia-0.4.7 /opt/julia-0.4
 RUN echo '("JULIA_LOAD_CACHE_PATH" in keys(ENV)) && unshift!(Base.LOAD_CACHE_PATH, ENV["JULIA_LOAD_CACHE_PATH"])' >> /opt/julia-0.4/etc/julia/juliarc.jl
 
 # Install julia 0.5
-RUN mkdir -p /opt/julia-0.5.1 && \
-    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.1-linux-x86_64.tar.gz | tar -C /opt/julia-0.5.1 -x -z --strip-components=1 -f -
-RUN ln -fs /opt/julia-0.5.1 /opt/julia-0.5
+RUN mkdir -p /opt/julia-0.5.2 && \
+    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.2-linux-x86_64.tar.gz | tar -C /opt/julia-0.5.2 -x -z --strip-components=1 -f -
+RUN ln -fs /opt/julia-0.5.2 /opt/julia-0.5
 RUN echo '("JULIA_LOAD_CACHE_PATH" in keys(ENV)) && unshift!(Base.LOAD_CACHE_PATH, ENV["JULIA_LOAD_CACHE_PATH"])' >> /opt/julia-0.5/etc/julia/juliarc.jl
 
 # Install julia 0.6
-RUN mkdir -p /opt/julia-0.6.0-dev && \
-    curl -s -L https://status.julialang.org/download/linux-x86_64 | tar -C /opt/julia-0.6.0-dev -x -z --strip-components=1 -f -
-RUN ln -fs /opt/julia-0.6.0-dev /opt/julia-0.6
+RUN mkdir -p /opt/julia-0.6.0-rc1 && \
+    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.6/julia-0.6-latest-linux-x86_64.tar.gz | tar -C /opt/julia-0.6.0-rc1 -x -z --strip-components=1 -f -
+RUN ln -fs /opt/julia-0.6.0-rc1 /opt/julia-0.6
 RUN echo '("JULIA_LOAD_CACHE_PATH" in keys(ENV)) && unshift!(Base.LOAD_CACHE_PATH, ENV["JULIA_LOAD_CACHE_PATH"])' >> /opt/julia-0.6/etc/julia/juliarc.jl
 
 # Make v0.5 default julia

@@ -49,12 +49,12 @@ RUN pip install --upgrade pyzmq PyDrive google-api-python-client jsonpointer jso
 RUN pip install 'notebook==4.2'
 
 # Install julia 0.5
-RUN mkdir -p /opt/julia-0.5.1 && \
-    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.1-linux-x86_64.tar.gz | tar -C /opt/julia-0.5.1 -x -z --strip-components=1 -f -
-RUN ln -fs /opt/julia-0.5.1 /opt/julia-0.5
+RUN mkdir -p /opt/julia-0.5.2 && \
+    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.5/julia-0.5.2-linux-x86_64.tar.gz | tar -C /opt/julia-0.5.2 -x -z --strip-components=1 -f -
+RUN ln -fs /opt/julia-0.5.2 /opt/julia-0.5
 
 # Make v0.5 default julia
-RUN ln -fs /opt/julia-0.5.1 /opt/julia
+RUN ln -fs /opt/julia-0.5.2 /opt/julia
 
 RUN echo "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/julia/bin\"" > /etc/environment && \
     echo "export PATH" >> /etc/environment && \
