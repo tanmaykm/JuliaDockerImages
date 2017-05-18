@@ -49,6 +49,8 @@ RUN apt-get update \
     hdf5-tools \
     && apt-get clean
 
+RUN pip install --upgrade pip
+
 RUN pip install --upgrade pyzmq PyDrive google-api-python-client jsonpointer jsonschema tornado sphinx pygments nose readline mistune invoke
 
 RUN pip install 'notebook==4.2'
