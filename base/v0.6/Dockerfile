@@ -1,5 +1,5 @@
 # Ubuntu Docker file for Julia
-# Version:v0.6.0-dev
+# Version:v0.6.0
 
 FROM ubuntu:16.04
 
@@ -49,12 +49,12 @@ RUN pip install --upgrade pyzmq PyDrive google-api-python-client jsonpointer jso
 RUN pip install 'notebook==4.2'
 
 # Install julia 0.6
-RUN mkdir -p /opt/julia-0.6.0-rc1 && \
-    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.6/julia-0.6-latest-linux-x86_64.tar.gz | tar -C /opt/julia-0.6.0-rc1 -x -z --strip-components=1 -f -
-RUN ln -fs /opt/julia-0.6.0-rc1 /opt/julia-0.6
+RUN mkdir -p /opt/julia-0.6.0 && \
+    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.6/julia-0.6.0-linux-x86_64.tar.gz | tar -C /opt/julia-0.6.0 -x -z --strip-components=1 -f -
+RUN ln -fs /opt/julia-0.6.0 /opt/julia-0.6
 
 # Make v0.6 default julia
-RUN ln -fs /opt/julia-0.6.0-rc1 /opt/julia
+RUN ln -fs /opt/julia-0.6.0 /opt/julia
 
 RUN echo "PATH=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/opt/julia/bin\"" > /etc/environment && \
     echo "export PATH" >> /etc/environment && \
